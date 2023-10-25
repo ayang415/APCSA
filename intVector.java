@@ -68,7 +68,14 @@ public class intVector {
      * @param value The numerical value to be added
      */
     public boolean add(int index, int value) {
-
+        testBounds(index);
+        tryResize();
+        for(int i = size; i > index; i--) {
+            arr[i] = arr[i-1];
+        }
+        arr[index] = value;
+        size ++;
+        return true;
     }
 
     /**
@@ -79,7 +86,20 @@ public class intVector {
      * @param value The value to be removed if it exists
      */
     public boolean remove(int value) {
+        tryResize();
+        removedIndex = size + 1;
+        for(int i = 0; i < size; i++) {
+            if(arr[i] == value) {
 
+            }
+        }
+        //
+        for(int i = size; i > index; i--) {
+            arr[i] = arr[i-1];
+        }
+        arr[index] = value;
+        size ++;
+        return true;
     }
 
     @Override

@@ -11,6 +11,9 @@ public class Start {
 
             System.out.println(test);
 
+            test.add(2, 200);
+            System.out.println(test);
+
         } catch(IllegalArgumentException ex) {
             System.out.println("That's illegal");
         } catch(ArithmeticException ex) {
