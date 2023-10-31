@@ -86,20 +86,20 @@ public class intVector {
      * @param value The value to be removed if it exists
      */
     public boolean remove(int value) {
-        tryResize();
-        removedIndex = size + 1;
+        int sizeChange = 0;
         for(int i = 0; i < size; i++) {
             if(arr[i] == value) {
-
+                for(int j = i; j < size; j++) {
+                    arr[j] = arr[j+1];
+                }
+                sizeChange++;
             }
         }
-        //
-        for(int i = size; i > index; i--) {
-            arr[i] = arr[i-1];
+        size -= sizeChange;
+        if(sizeChange > 0) {
+            return true;
         }
-        arr[index] = value;
-        size ++;
-        return true;
+        return false;
     }
 
     @Override
