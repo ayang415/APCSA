@@ -1,4 +1,5 @@
-import com.apple.laf.resources.aqua;
+package LinearStructures;
+//import com.apple.laf.resources.aqua;
 
 public class intVector {
     
@@ -86,18 +87,14 @@ public class intVector {
      * @param value The value to be removed if it exists
      */
     public boolean remove(int value) {
-        int sizeChange = 0;
         for(int i = 0; i < size; i++) {
             if(arr[i] == value) {
                 for(int j = i; j < size; j++) {
                     arr[j] = arr[j+1];
                 }
-                sizeChange++;
+                size--;
+                return true;
             }
-        }
-        size -= sizeChange;
-        if(sizeChange > 0) {
-            return true;
         }
         return false;
     }
