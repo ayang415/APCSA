@@ -15,7 +15,10 @@ public class Start {
         testStr.add(1, "goat");
         System.out.println(testInt);
         System.out.println(testStr);
-
+        System.out.println(testInt.indexOf(40));
+        System.out.println(testInt.get(5));
+        System.out.println(testInt.contains(40));
+        System.out.println(testStr.remove("Mouse"));
         System.out.println("HI");
         
     }
