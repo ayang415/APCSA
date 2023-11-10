@@ -1,4 +1,7 @@
 package LinearStructures;
+import java.lang.Iterable;
+import java.util.Iterator; 
+
 
 public class ArrayList<E> {
     //protected is public in the package, private outside
@@ -112,6 +115,28 @@ public class ArrayList<E> {
         E old = data[index];
         data[index] = e;
         return old;
+    }
+
+    public Iterator<E> iterator() {
+        return new ArrayListIterator();
+    }
+
+    // a class inside a class !?
+    private class ArrayListIterator implements Iterator<E> {
+        private int current = 0;
+
+        public boolean hasNext() {
+            return (current < size);
+        }
+
+        public E next() {
+            return data[current++];
+        }
+
+        public void remove() {
+            //ArrayList.this refers to `this` of the enclosing class
+            ArrayList.this.remove(current);
+        }
     }
 
     @Override
