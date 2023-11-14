@@ -65,6 +65,7 @@ public class LinkedList<E> {
         } else {
             tail.next = newNode;
             tail = tail.next;
+            size++;
         }
     }
 
@@ -125,9 +126,65 @@ public class LinkedList<E> {
         }
     }
 
+    public E remove(int index) {
+        checkIndex(index);
+        if(index == 0) return removeFirst();
+        else if (index == size) return removeLast();
+        else {
+            Node<E> current = head;
+            for(int i = 1; i < index - 1; i++) {
+                current = current.next;
+            }
+            Node<E> temp = current.next;
+            current.next = (current.next).next;
+            size--;
+            return temp.element;
+        }
+    }
+
     public void clear() {
         size = 0;
         head = tail = null;
+    }
+
+    public E get(int index) {
+        checkIndex(index);
+        if(index == 0) {
+            return head.element;
+        }
+        Node<E> current = head;
+        for(int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.element;
+    }
+
+    public int lastIndexOf(E e) {
+        if(size == 0) return -1;
+
+        int index = 0;
+        int latest = -1;
+        Node<E> current = head;
+        do{
+            if(current.element == e) {
+                latest = index;
+            }
+            current = current.next;
+            index++;
+        } while(current != null);
+
+        return latest;
+    }
+
+    public E set(int index, E e) {
+        checkIndex(index);
+        Node<E> current = head;
+        for(int i = 1; i < index; i++) {
+            current = current.next;
+        }
+        Node<E> temp = current;
+        current.element = e;
+        return temp.element;
     }
 
     private static class Node<E> {
