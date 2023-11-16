@@ -1,9 +1,10 @@
 package LinearStructures;
+
 import java.lang.Iterable;
 import java.util.Iterator; 
 
 
-public class ArrayList<E> {
+public class ArrayList<E> implements Iterable<E>{
     //protected is public in the package, private outside
     protected static final int INITIAL_CAPACITY = 10;
     private int size = 0;

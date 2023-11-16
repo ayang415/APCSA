@@ -1,6 +1,9 @@
 package LinearStructures;
 
-public class LinkedList<E> {
+import java.lang.Iterable;
+import java.util.Iterator; 
+
+public class LinkedList<E> implements Iterable<E>{
     private int size = 0;
 
     private Node<E> head, tail;
@@ -18,7 +21,7 @@ public class LinkedList<E> {
     }
 
     public boolean isEmpty() {
-        return size = 0;
+        return size == 0;
     }
 
     public int size() {
@@ -179,7 +182,7 @@ public class LinkedList<E> {
     public E set(int index, E e) {
         checkIndex(index);
         Node<E> current = head;
-        for(int i = 1; i < index; i++) {
+        for(int i = 0; i < index; i++) {
             current = current.next;
         }
         Node<E> temp = current;
@@ -187,9 +190,50 @@ public class LinkedList<E> {
         return temp.element;
     }
 
+    public Iterator<E> iterator() {
+        return new LinkedListIterator();
+    }
+
+    // a class inside a class !?
+    private class LinkedListIterator implements Iterator<E> {
+        private Node<E> current = head;
+        int i = 0;
+
+        @Override
+        public boolean hasNext() {
+            return i < size;
+        }
+
+        @Override
+        public E next() {
+            Node<E> temp = current;
+            current = current.next;
+            i++;
+            return temp.element;
+        }
+
+        @Override
+        public void remove() {
+            LinkedList.this.remove(i);
+        }
+    }
+
+    @Override
+    public String toString() {
+        Node<E> current = head.next;
+
+        if(size == 0) return "[]";
+        String t = "[" + head.element;
+        for(int i = 1; i < size; i++) {
+            t += ", " + current.element;
+            current = current.next;
+        }
+        return t + "]";
+    }
+
     private static class Node<E> {
         E element;
-        Node next;
+        Node<E> next;
 
         public Node(E element) {
             this.element = element;
